@@ -1,4 +1,3 @@
-# prompt: upload diabetes_prediction_dataset.csv from my laptop files to this notebook and save as a df
 import pandas as pd
 import pandas as pd
 import seaborn as sns
@@ -9,10 +8,7 @@ import numpy as np
 df = pd.read_csv('diabetes_012_health_indicators.csv')
 y = df.Diabetes_012
 
-df
-
-############################## write your code ###########################
-# TODO: calculate the missing ratio of each features column in dataframe
+# calculate the missing ratio of each features column in dataframe
 df_na = (df.isnull().sum() / len(df)) * 100
 df_na = df_na.drop(df_na[df_na == 0].index).sort_values(ascending=False)
 
@@ -28,8 +24,8 @@ plt.title('Percent missing data by features', fontsize=15)
 
 print(df['BMI'].describe())
 plt.figure(figsize=(9, 8))
-############################## write your code ###########################
-# TODO: Plot the distribution of blood pressure
+
+# Plot the distribution of blood pressure
 sns.displot(df['BMI'])
 
 sns.displot((df['Diabetes_012']))
@@ -38,8 +34,7 @@ sns.displot((df['Diabetes_012']))
 df_num = df.select_dtypes(include = 'number')
 df_num
 
-############################## write your code ###########################
-# TODO: Plot the distribution of each numeric featrues [hint: you can use pandas: df.hist()]
+# Plot the distribution of each numeric featrues [hint: you can use pandas: df.hist()]
 df.hist(df_num.columns, figsize=(16, 20), bins=50, xlabelsize=8, ylabelsize=8)
 
 df_cate = df.select_dtypes(include = ['O'])
@@ -55,8 +50,7 @@ sns.heatmap(df_corr,
 
 print(df_corr.iloc[:, 0])
 
-############################## write your code ###########################
-# TODO: get the correlation between features and label (SalePrice)
+# get the correlation between features and label (SalePrice)
 # Only last column or last row of the correlation matrix above is needed as we want to focus on the label
 df_corr = df_corr.iloc[:, 0]
 golden_features_list = df_corr[abs(df_corr) > 0.1].sort_values(ascending=False)
@@ -189,8 +183,7 @@ print(golden_features_list)
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 from mlxtend.plotting import plot_sequential_feature_selection as plot_sfs
 
-############################## write your code ###########################
-# TODO: use SequentialFeatureSelector to run a step forward feature selection
+# use SequentialFeatureSelector to run a step forward feature selection
 # you can set the parameters: features - up to 70, scoring -'neg_mean_absolute_error', cv=3
 # Note: you can also use a larger n_jobs to speed up computation
 # Create a Linear Regression model
@@ -216,8 +209,7 @@ plt.title('Sequential Forward Selection (w. StdErr)')
 plt.grid()
 plt.show()
 
-############################## write your code ###########################
-# TODO: use SequentialFeatureSelector to run a step backward feature selection
+# use SequentialFeatureSelector to run a step backward feature selection
 # you can set the parameters: features - down to 1, scoring -'neg_mean_absolute_error', cv=3
 # Note: you can also use a larger n_jobs to speed up computation
 regr = LogisticRegression(multi_class='multinomial', solver='lbfgs')
